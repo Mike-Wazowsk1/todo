@@ -22,7 +22,7 @@ func test_fun(bot *tgbotapi.BotAPI, update tgbotapi.Update, period int, text str
 }
 
 func main() {
-	schedule[0] = 60
+	schedule[0] = 2
 	schedule[1] = 3600
 	schedule[2] = 86400
 	schedule[3] = 604800
@@ -133,6 +133,13 @@ func main() {
 						panic(err)
 					}
 					go test_fun(bot, update, schedule[period]*int(delta), globalText)
+					msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Привычка создана!")
+					msg.ReplyMarkup = numericKeyboard
+					msg.ReplyToMessageID = update.Message.MessageID
+					if _, err := bot.Send(msg); err != nil {
+						panic(err)
+					}
+					state = 0
 				}
 				if state == 0 {
 					msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
