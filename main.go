@@ -22,7 +22,7 @@ func test_fun(bot *tgbotapi.BotAPI, update tgbotapi.Update, period int, text str
 }
 
 func main() {
-	schedule[0] = 1
+	schedule[0] = 60
 	schedule[1] = 3600
 	schedule[2] = 86400
 	schedule[3] = 604800
